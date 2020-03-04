@@ -104,7 +104,13 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () async {
+          var d = await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(2018,1,1), lastDate: DateTime.now());
+          var t = await showTimePicker(context: context, initialTime: TimeOfDay.now());
+          d = DateTime(d.year, d.month, d.day, t.hour, t.minute);
+          print(d);
+          print(( d.millisecondsSinceEpoch / 1000).toInt());
+        },
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
